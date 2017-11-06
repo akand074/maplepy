@@ -1,6 +1,6 @@
 class GraphQLSDK(object):
 
-    def __init__(self, query, mutate, subscribe):
+    def __init__(self, query=None, mutate=None, subscribe=None):
         self.query = query
         self.mutate = mutate
         self.subscribe = subscribe
@@ -9,7 +9,7 @@ class GraphQLSDK(object):
 class TypeInterface(object):
 
     def __init__(self, client):
-        self.client = client
+        self._client = client
 
 
 class Query(TypeInterface):
