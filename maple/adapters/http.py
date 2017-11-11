@@ -7,7 +7,7 @@ class HttpAdapter(object):
     def query(self, query_string, params):
         raise NotImplementedError()
 
-    def mutate(self, mutate_string, params):
+    def mutation(self, mutate_string, params):
         raise NotImplementedError()
 
     def execute(self, query, variables={}):

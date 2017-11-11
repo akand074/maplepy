@@ -15,10 +15,12 @@ class HTTPClient(HttpAdapter):
         return self.execute(schema)['data']
 
     def query(self, query_string, params):
-        raise NotImplementedError()
+        # TODO: handle data/errors in body?
+        return self.execute(query_string, params)
 
-    def mutate(self, mutate_string, params):
-        raise NotImplementedError()
+    def mutation(self, mutate_string, params):
+        # TODO: handle data/errors in body?
+        return self.execute(mutate_string, params)
 
     def execute(self, query, variables={}):
         params = {
