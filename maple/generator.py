@@ -8,8 +8,8 @@ from maple.docs import build_method_help_docs
 from maple.contrib.clients.http.http import HTTPClient
 
 
-def generate_graphql_sdk(graphql_url, http_adapter=HTTPClient, extra_headers={}):
-    http_client = http_adapter(graphql_url, extra_headers=extra_headers)
+def generate_graphql_sdk(graphql_url, http_adapter=HTTPClient, http_headers={}):
+    http_client = http_adapter(graphql_url, headers=http_headers)
 
     schema = http_client.schema(INTROSPECTION_QUERY)['__schema']
 

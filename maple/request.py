@@ -1,12 +1,5 @@
 from maple.utils import get_field_type, is_field_required
-
-
-# TODO: Move this somewhere
-class GraphQLBlock(object):
-
-    def __init__(self, name, fields):
-        self.name = name
-        self.fields = fields
+from maple.sdk import GraphQLBlock
 
 
 def get_graphql_request(spec, request_type, fields, params, operation_name="MyRequest"):

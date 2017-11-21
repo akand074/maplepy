@@ -6,15 +6,23 @@ class GraphQLSDK(object):
         self.mutation = mutation
 
 
-class TypeInterface(object):
+class HTTPTypeInterface(object):
 
     def __init__(self, client):
+        # TODO: Error if not of type http adapter
         self._client = client
 
 
-class Query(TypeInterface):
+class Query(HTTPTypeInterface):
     pass
 
 
-class Mutation(TypeInterface):
+class Mutation(HTTPTypeInterface):
     pass
+
+
+class GraphQLBlock(object):
+
+    def __init__(self, name, fields):
+        self.name = name
+        self.fields = fields

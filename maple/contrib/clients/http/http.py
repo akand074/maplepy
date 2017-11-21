@@ -5,10 +5,10 @@ from maple.adapters.http import HttpAdapter
 
 class HTTPClient(HttpAdapter):
 
-    def __init__(self, graphql_url, session=None, extra_headers={}):
+    def __init__(self, graphql_url, session=None, headers={}):
         self.graphql_url = graphql_url
         self.session = session or requests.Session()
-        self.session.headers.update(extra_headers)
+        self.session.headers.update(headers)
 
     def schema(self, schema):
         # TODO: handle data/errors in body somehow?
