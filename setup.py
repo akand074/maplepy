@@ -11,14 +11,14 @@ TEST_REQUIREMENTS = [
 ]
 
 setup(
-    name="maple",
+    name="maplepy",
     version=VERSION,
 
     description="Client code generator for GraphQL APIs based on introspection queries and schema files",
     long_description=open('README.md'),
 
     author='Andrew Kandalaft',
-    author_email='',
+    author_email='andrew.kandalaft@gmail.com',
 
     license='MIT',
 
