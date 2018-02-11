@@ -2,15 +2,17 @@ from maple.utils import get_field_type, is_field_required
 from maple.sdk import GraphQLBlock
 
 
-def get_graphql_request(spec, request_type, fields, params, operation_name="MyRequest"):
-    # TODO: This better
-    if request_type not in {'query', 'mutation'}:
-        raise
+def get_graphql_request(spec, request_type, fields, params, operation_name="MyRequest", alias=None):
+    VALID_TYPES = {'query', 'mutation'}
+    if request_type not in VALID_TYPES:
+        raise TypeError('Invalid request type {request_type}, must be one of {valid_types}'.format(
+            request_type=request_type,
+            valid_types=', '.join(VALID_TYPES)
+        ))
 
-    # TODO: Add alias?
     return '''
     {type} {operation}({variables}) {{
-        {name}({params}) {{
+        {alias}{name}({params}) {{
             {fields}
         }}
     }}
@@ -18,6 +20,7 @@ def get_graphql_request(spec, request_type, fields, params, operation_name="MyRe
         type=request_type,
         operation=operation_name,
         variables=build_variables(spec['args'], params),
+        alias='{}:'.format(alias) if alias else '',
         name=spec['name'],
         params=build_params(spec['args']),
         fields=build_fields(fields)
