@@ -30,6 +30,9 @@ class Mutation(HTTPTypeInterface):
 
 class GraphQLBlock(object):
 
-    def __init__(self, name, fields):
-        self.name = name
-        self.fields = fields
+    # User _ in paramater names to avoid name collisions
+    def __init__(self, _name, _fields, _alias=None, **_arguments):
+        self.name = _name
+        self.fields = _fields
+        self.alias = _alias
+        self.arguments = _arguments

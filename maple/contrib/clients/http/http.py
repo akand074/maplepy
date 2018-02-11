@@ -13,10 +13,10 @@ class HTTPClient(HttpAdapter):
     def schema(self, schema):
         return self.execute(schema)['data']
 
-    def query(self, query_string, params):
+    def query(self, query_string, params={}):
         return self.execute(query_string, params)
 
-    def mutation(self, mutate_string, params):
+    def mutation(self, mutate_string, params={}):
         return self.execute(mutate_string, params)
 
     def execute(self, query, variables={}):
