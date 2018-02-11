@@ -1,3 +1,6 @@
+from maple.adapters.http import HttpAdapter
+
+
 class GraphQLSDK(object):
 
     def __init__(self, schema, query=None, mutation=None):
@@ -9,7 +12,11 @@ class GraphQLSDK(object):
 class HTTPTypeInterface(object):
 
     def __init__(self, client):
-        # TODO: Error if not of type http adapter
+
+        # Any client provided for this type must support the HttpAdapter interface
+        if not isinstance(client, HttpAdapter):
+            raise TypeError('Invalid client provided, expected client of type {}'.format(type(HttpAdapter)))
+
         self._client = client
 
 
@@ -23,6 +30,9 @@ class Mutation(HTTPTypeInterface):
 
 class GraphQLBlock(object):
 
-    def __init__(self, name, fields):
-        self.name = name
-        self.fields = fields
+    # User _ in paramater names to avoid name collisions
+    def __init__(self, _name, _fields, _alias=None, **_arguments):
+        self.name = _name
+        self.fields = _fields
+        self.alias = _alias
+        self.arguments = _arguments

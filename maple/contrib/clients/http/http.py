@@ -11,15 +11,12 @@ class HTTPClient(HttpAdapter):
         self.session.headers.update(headers)
 
     def schema(self, schema):
-        # TODO: handle data/errors in body somehow?
         return self.execute(schema)['data']
 
-    def query(self, query_string, params):
-        # TODO: handle data/errors in body?
+    def query(self, query_string, params={}):
         return self.execute(query_string, params)
 
-    def mutation(self, mutate_string, params):
-        # TODO: handle data/errors in body?
+    def mutation(self, mutate_string, params={}):
         return self.execute(mutate_string, params)
 
     def execute(self, query, variables={}):
@@ -28,5 +25,9 @@ class HTTPClient(HttpAdapter):
             'variables': variables
         }
 
-        # TODO: Handle error codes?
-        return self.session.post(self.graphql_url, json=params).json()
+        response = self.session.post(self.graphql_url, json=params)
+
+        # Always expecting a 2xx status code
+        response.raise_for_status()
+
+        return response.json()
