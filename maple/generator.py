@@ -37,17 +37,15 @@ def generate_type_method(instance, field, action, obj_type):
     required_params = get_required_params(field.get('args', []))
     method_docs = build_method_help_docs(field)
 
-    # TODO: Add deprecation warnings
-
-    def field_method(self, fields, **variables):
+    def field_method(self, fields, **arguments):
 
         # Make sure all required params are sent in
         for rp in required_params:
-            if rp not in variables:
-                raise TypeError("Missing required keyword paramater {}".format(rp))
+            if rp not in arguments:
+                raise TypeError("Missing required keyword argument {}".format(rp))
 
-        query_string = get_graphql_request(field, action, fields, variables)
-        return getattr(self._client, action)(query_string, variables)
+        query_string = get_graphql_request(field, action, fields, arguments)
+        return getattr(self._client, action)(query_string, arguments)
 
     field_method.__doc__ = method_docs
     field_method.__name__ = str(field_name)
